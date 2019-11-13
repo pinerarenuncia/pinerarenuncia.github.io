@@ -1,0 +1,26 @@
+{
+  "name": "estopasaenchile",
+  "version": "1.0.0",
+  "description": "Evidencia de lo que esta pasando en Chile",
+  "author": "Miguel Alcaino",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "build:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt build",
+    "generate:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt generate",
+    "deploy": "push-dir --dir=dist --branch=master --cleanup"
+  },
+  "dependencies": {
+    "@nuxtjs/device": "^1.2.3",
+    "bulma": "^0.8.0",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.13.0",
+    "push-dir": "^0.4.1",
+    "sass-loader": "^8.0.0"
+  }
+}
