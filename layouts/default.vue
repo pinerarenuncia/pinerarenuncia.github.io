@@ -3,7 +3,7 @@
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item" href="../">
+          <a @click.stop.prevent="$store.commit('setCurrentPage', 1)" class="navbar-item" href="../">
             <div class="columns">
               <div class="column">
                 <p class="title is-1">Esto pasa en Chile</p>

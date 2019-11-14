@@ -31,7 +31,7 @@
       <ul class="pagination-list">
         <li v-for="(page, pageKey) in pagesAmount" :key="'page'+pageKey">
           <nuxt-link @click.native="goToPage(page)" :to="'/?page='+page"
-                     :class="{'pagination-link': true, 'is-current': page === currentPage }"
+                     :class="{'pagination-link': true, 'is-current': page === $store.state.currentPage }"
                      :aria-label="'Goto page '+page">{{page}}
           </nuxt-link>
         </li>
@@ -50,7 +50,7 @@
     },
     created() {
       let currentPage = this.$route.query.page ? parseInt(this.$route.query.page) : 1;
-      this.setCurrentPage(currentPage);
+      this.$store.commit('setCurrentPage', currentPage);
     },
     data() {
       return {
@@ -86,17 +86,14 @@
       isSearchEmpty(newValue) {
         // If the search field is not empty
         if (!newValue) {
-          this.setCurrentPage(1);
+          this.$store.commit('setCurrentPage', 1);
         }
       }
     },
     methods: {
       goToPage(page) {
-        this.setCurrentPage(page);
+        this.$store.commit('setCurrentPage', page);
         window.scrollTo(0, 0);
-      },
-      setCurrentPage(page) {
-        this.currentPage = page;
       },
       clearSearch() {
         this.searchText = null;
@@ -113,7 +110,7 @@
       },
       getVideosForPage(allVideos) {
         let videos = [];
-        for (let i = (this.currentPage - 1) * this.videosPerPage; i < this.currentPage * this.videosPerPage; i++) {
+        for (let i = (this.$store.state.currentPage - 1) * this.videosPerPage; i < this.$store.state.currentPage * this.videosPerPage; i++) {
           if (typeof allVideos[i] !== 'undefined' && allVideos[i] !== null) {
             videos.push(allVideos[i]);
           }
