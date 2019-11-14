@@ -27,25 +27,18 @@
       <video-box v-for="(video, index) in getVideosForRow(row-1, columns)"
                  :key="index" :video="video"/>
     </div>
-    <nav class="pagination" role="navigation" aria-label="pagination">
-      <ul class="pagination-list">
-        <li v-for="(page, pageKey) in pagesAmount" :key="'page'+pageKey">
-          <nuxt-link @click.native="goToPage(page)" :to="'/?page='+page"
-                     :class="{'pagination-link': true, 'is-current': page === $store.state.currentPage }"
-                     :aria-label="'Goto page '+page">{{page}}
-          </nuxt-link>
-        </li>
-      </ul>
-    </nav>
+    <paginator @page-clicked="goToPage($event)" :current-page="$store.state.currentPage" :pages-amount="pagesAmount" />
   </div>
 </template>
 
 <script>
   import VideoBox from "../components/VideoBox";
   import videosProcessor from "../lib/VideosProcessor"
+  import Paginator from "../components/Paginator";
 
   export default {
     components: {
+      Paginator,
       VideoBox
     },
     created() {
@@ -91,10 +84,6 @@
       }
     },
     methods: {
-      goToPage(page) {
-        this.$store.commit('setCurrentPage', page);
-        window.scrollTo(0, 0);
-      },
       clearSearch() {
         this.searchText = null;
       },

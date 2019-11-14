@@ -3,14 +3,14 @@
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
-          <a @click.stop.prevent="$store.commit('setCurrentPage', 1)" class="navbar-item" href="../">
+          <nuxt-link @click.native="$store.commit('setCurrentPage', 1)" class="navbar-item" to="/">
             <div class="columns">
               <div class="column">
                 <p class="title is-1">Esto pasa en Chile</p>
                 <p class="subtitle is-6">Evidencia de lo que est&aacute; pasando en Chile</p>
               </div>
             </div>
-          </a>
+          </nuxt-link>
         </div>
         <div class="navbar-brand">
           <span class="navbar-burger burger" data-target="navbarMenu">
